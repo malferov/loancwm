@@ -11,3 +11,4 @@
 k
 dat/*
 !dat/export*
+!COPYING.txt
