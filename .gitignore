@@ -1,0 +1,13 @@
+*.py
+*.pyc
+*.csv
+*.sh
+*.php
+*.xml
+*.xlsx
+*.txt
+*.png
+*.dat
+k
+dat/*
+!dat/export*
