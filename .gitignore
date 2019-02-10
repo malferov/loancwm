@@ -9,6 +9,8 @@
 *.png
 *.dat
 k
-dat/*
-!dat/export*
+reporting/*
+!reporting/*.sh
+!reporting/*.py
+!reporting/*.sql
 !COPYING.txt
