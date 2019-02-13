@@ -5,10 +5,13 @@ drop table if exists deals;
 create TEMP table deals as
 select o.date, datetime(o.date, 'unixepoch', 'localtime') as dealdate, 
 r.period, o.camt, o.ramt, o.camt-o.ramt as outstanding,
-o.rdate, datetime(o.rdate, 'unixepoch', 'localtime') as returndate,
+datetime(o.rdate, 'unixepoch', 'localtime') as returndate,
 datetime(o.date + r.period * 86400, 'unixepoch', 'localtime') as maturitydate, 
 case when o.camt - o.ramt > 0 then (strftime('%s','now') - o.date)/86400 - r.period
-else (o.rdate - o.date)/86400 - r.period end delinq
+else (o.rdate - o.date)/86400 - r.period end delinq,
+r.rating, r.r1, r.r2, r.r3, r.bl,
+round((r.creditamount - r.backamount) / r.creditamount * 100, 1) as debt,
+r.creditamount
 from operation o
 inner join portfolio p on p.CDWMTranID = o.id
 inner join rating r on r.tdrnum = p.CTenderID;
