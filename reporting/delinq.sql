@@ -1,5 +1,6 @@
 /*
   denormalized deals source
+  TODO add rate to the deals source
 */
 drop table if exists deals;
 create TEMP table deals as
