@@ -1,2 +1,4 @@
-Copyright (c) 2014-2019 Maxim Alferov (malferov)
+Copyright (c) 2014-2019
+Maxim Alferov (malferov)
+Dmitry Gurinovich (dmitry-gurinovich)
 All Rights Reserved
