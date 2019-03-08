@@ -13,4 +13,7 @@ reporting/*
 !reporting/*.sh
 !reporting/*.py
 !reporting/*.sql
+!reporting/*.ddl
 !COPYING.txt
+
+.ipynb_checkpoints
