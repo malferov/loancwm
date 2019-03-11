@@ -26,3 +26,13 @@ and outstanding > 0
 and delinq > 90
 --order by cast(creditamount as decimal)
 group by cr0, cr1, cr2, cr3, cr4, cr5, cr6, cr7, cr8, cr9, cr10, cr20, cr50, cr100--, debt0
+
+/*
+  rate of defaults by country
+*/
+select reg_country, a.total_count, round(count(1) / cast(a.total_count as REAL) * 100, 0) as default_rate
+from deals d, (select reg_country_id, count(1) as total_count from deals group by reg_country_id) a
+where delinq > 90
+and d.reg_country_id = a.reg_country_id
+group by reg_country
+order by default_rate desc;
