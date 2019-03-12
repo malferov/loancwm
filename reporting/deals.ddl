@@ -5,6 +5,7 @@ select
   cast(r.tdrnum as INT) as tender_num,
   cast(o.date as INT) as dea_date,
   datetime(o.date, 'unixepoch', 'localtime') as deal_date,
+  d.report_date,
   cast(r.period as INT) as period,
   cast(o.camt as REAL) as credit_amount,
   cast(o.ramt as REAL) as return_amount,
@@ -13,7 +14,7 @@ select
   datetime(o.rdate, 'unixepoch', 'localtime') as return_date,
   cast(o.date + r.period * 86400 as INT) as exp_date,
   datetime(o.date + r.period * 86400, 'unixepoch', 'localtime') as expiration_date,
-  cast(case when o.camt - o.ramt > 0 then (strftime('%s','now') - o.date)/86400 - r.period
+  cast(case when o.camt - o.ramt > 0 then (strftime('%s', d.report_date) - o.date)/86400 - r.period
     else (o.rdate - o.date)/86400 - r.period end as INT) as delinq,
   cast(r.rating as INT) as rating,
 --  cast(r.r1 as INT) as r1,
@@ -43,4 +44,5 @@ select
 from operation o
 inner join portfolio p on p.CDWMTranID = o.id
 inner join rating r on r.tdrnum = p.CTenderID
-inner join tenders t on t.TenderID = p.CTenderID;
+inner join tenders t on t.TenderID = p.CTenderID
+inner join (select datetime('2019-03-12 20:00:00') as report_date) d;
