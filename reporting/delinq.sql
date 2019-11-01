@@ -4,7 +4,7 @@
 drop table if exists delinq;
 create TEMP table delinq as
 select sum(outstanding) as outstanding,
-sum(ramt) as paid,
+sum(return_amount) as paid,
 outstanding > 0 as active,
 delinq > 0   as overdue, 
 delinq > 0   and delinq <= 60 as delinq_60,
@@ -23,7 +23,7 @@ from delinq;
 */
 drop table if exists overall;
 create TEMP table overall as
-select sum(camt) as credit,
+select sum(credit_amount) as credit,
 delinq > 0   as overdue, 
 delinq > 0   and delinq <= 60 as delinq_60,
 delinq > 60  and delinq <= 360 as delinq_360,
